@@ -18,8 +18,6 @@ interface CheckoutTemplate1Props {
 
 const Template1: React.FC<CheckoutTemplate1Props> = ({
     productOptions,
-    timerDuration,
-    spotLimit,
 }) => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 bg-blue-100">

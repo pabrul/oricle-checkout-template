@@ -1,5 +1,6 @@
 // src/app/page.tsx
 import fs from 'fs';
+import Link from 'next/link';
 import path from 'path';
 import matter from 'gray-matter';
 import CheckoutPage from '@/components/checkout-page';
@@ -48,18 +49,18 @@ export default function Home({
       <div className="bg-gray-100 p-4 mb-4">
         <h2 className="font-bold mb-2">Template Switcher:</h2>
         <div className="space-x-4">
-          <a
+          <Link
             href="/?template=1"
             className={`px-4 py-2 rounded ${templateNumber === 1 ? 'bg-blue-500 text-white' : 'bg-white'}`}
           >
             Template 1
-          </a>
-          <a
+          </Link>
+          <Link
             href="/?template=2"
             className={`px-4 py-2 rounded ${templateNumber === 2 ? 'bg-blue-500 text-white' : 'bg-white'}`}
           >
             Template 2
-          </a>
+          </Link>
         </div>
       </div>
       <CheckoutPage info={checkoutData} />
