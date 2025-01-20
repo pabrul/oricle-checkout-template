@@ -20,16 +20,15 @@ interface CheckoutInfo {
   spotLimit: number;
 }
 
-interface PageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | undefined };
+// Definindo os tipos corretos para Next.js App Router
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default function Home({
-  searchParams,
-}: PageProps) {
+export default async function Home({ searchParams }: Props) {
   // Determine which template to use from query params or default to template 1
-  const templateNumber = searchParams.template ? parseInt(searchParams.template) : 1;
+  const templateParam = searchParams.template
+  const templateNumber = typeof templateParam === 'string' ? parseInt(templateParam) : 1;
 
   // Choose the correct markdown file
   const filename = templateNumber === 2 ? 'splash-foam-checkout-template2.md' : 'splash-foam-checkout-template1.md';
