@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { PayPalButton } from '@/components/PayPalButton';
 import { Timer } from '@/components/Timer';
+import Link from 'next/link';
 import { User, Clock3, MapPin, CreditCard } from 'lucide-react';
 
 interface ProductOption {
@@ -378,13 +379,21 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                             className="mx-auto mb-4"
                         />
                         <div className="flex justify-center space-x-4">
-                            <a href="#" className="hover:text-gray-700">Shopping & Returns</a>
+                            <Link href="#" className="hover:text-gray-700">
+                                Shopping & Returns
+                            </Link>
                             <span>|</span>
-                            <a href="#" className="hover:text-gray-700">Contact Us</a>
+                            <Link href="#" className="hover:text-gray-700">
+                                Contact Us
+                            </Link>
                             <span>|</span>
-                            <a href="#" className="hover:text-gray-700">Privacy Policy</a>
+                            <Link href="#" className="hover:text-gray-700">
+                                Privacy Policy
+                            </Link>
                             <span>|</span>
-                            <a href="#" className="hover:text-gray-700">Terms and Conditions</a>
+                            <Link href="#" className="hover:text-gray-700">
+                                Terms and Conditions
+                            </Link>
                         </div>
                         <div>Copyright © 2024 Oricle. All Rights Reserved.</div>
                         <div className="flex justify-center space-x-2">
