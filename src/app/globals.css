@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root Variables */
 :root {
   --background: #f8f9fa;
   --foreground: #171717;
@@ -26,37 +27,50 @@
   --gray-900: #111827;
 }
 
+/* Global Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply text-gray-900 bg-gray-50 font-sans antialiased leading-relaxed;
 }
 
-/* Custom Styles */
+/* Utility Classes */
 .input-base {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 outline-none;
+  @apply w-full px-4 py-2 border rounded-lg border-gray-300 bg-white 
+    focus:ring-2 focus:ring-primary focus:border-primary 
+    transition-all duration-200 outline-none shadow-sm placeholder-gray-400;
 }
 
 .btn-base {
-  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium 
+    transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+    disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 .btn-primary {
-  @apply btn-base bg-primary text-white hover:bg-primary-dark;
+  @apply btn-base bg-primary text-white hover:bg-primary-dark focus:ring-primary-dark;
 }
 
 .btn-success {
-  @apply btn-base bg-success text-white hover:brightness-110;
+  @apply btn-base bg-success text-white hover:brightness-110 focus:ring-success-light;
 }
 
+.btn-warning {
+  @apply btn-base bg-warning text-white hover:brightness-110 focus:ring-warning-light;
+}
+
+.btn-danger {
+  @apply btn-base bg-danger text-white hover:brightness-110 focus:ring-danger-light;
+}
+
+/* Card Components */
 .card {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  @apply bg-white rounded-lg shadow-md border border-gray-200 p-6 
+    transition-all duration-200 hover:shadow-lg;
 }
 
+/* Badge Styles */
 .badge {
-  @apply px-2 py-1 text-xs font-semibold rounded-full;
+  @apply inline-flex items-center justify-center px-3 py-1 text-xs font-semibold 
+    rounded-full tracking-wide uppercase;
 }
 
 .badge-primary {
@@ -75,7 +89,7 @@ body {
   @apply badge bg-danger-light text-danger;
 }
 
-/* Form Styles */
+/* Form Elements */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -85,7 +99,31 @@ textarea {
   @apply input-base;
 }
 
+textarea {
+  @apply resize-none h-32;
+}
+
 /* Custom Radio Button */
 input[type="radio"] {
   @apply w-5 h-5 border-2 border-gray-300 text-primary focus:ring-primary cursor-pointer;
+}
+
+/* Custom Checkbox */
+input[type="checkbox"] {
+  @apply w-5 h-5 border-2 border-gray-300 text-primary focus:ring-primary cursor-pointer rounded;
+}
+
+/* Custom Hover Effects */
+.hover-effect {
+  @apply transition-all duration-200 ease-in-out hover:scale-105 hover:shadow-md;
+}
+
+/* Responsive Grid */
+.grid-responsive {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+/* Container */
+.container {
+  @apply max-w-7xl mx-auto px-6 sm:px-12 lg:px-20;
 }

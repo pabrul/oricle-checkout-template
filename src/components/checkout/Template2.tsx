@@ -57,14 +57,14 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
-            <header className="bg-white border-b border-gray-200">
-                <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <header className="bg-white border-b border-gray-200 shadow-md sticky top-0 z-50">
+                <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
                     <Image
                         src="/images/logo.png"
                         alt="Logo"
                         width={120}
                         height={40}
-                        className="h-10 w-auto"
+                        className="h-10 w-auto transition-all duration-300 hover:scale-105"
                     />
                     <div className="flex items-center space-x-2">
                         <Image
@@ -72,6 +72,8 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                             alt="Secure Checkout"
                             width={100}
                             height={30}
+                            className="opacity-90 hover:opacity-100 transition-all duration-300"
+
                         />
                     </div>
                 </div>
@@ -79,12 +81,12 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
 
             <div className="max-w-4xl mx-auto px-4 py-8">
                 {/* Timer Banner */}
-                <div className="bg-[#fff9e6] p-4 rounded-lg mb-4">
+                <div className="bg-yellow-50 p-6 rounded-xl shadow-md mb-6 flex items-center justify-between animate-fade-in">
                     <div className="flex items-center justify-between px-4">
                         <div className="flex items-center space-x-4">
                             {/* 50% OFF Badge */}
                             <div className="relative">
-                                <div className="bg-red-600 text-white rounded-full w-20 h-20 flex flex-col items-center justify-center transform">
+                                <div className="bg-red-600 text-white rounded-full w-24 h-24 flex flex-col items-center justify-center shadow-lg animate-bounce-slow">
                                     <span className="text-2xl font-bold">50%</span>
                                     <span className="text-sm">OFF</span>
                                 </div>
@@ -92,7 +94,7 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
 
                             <div className="flex flex-col">
                                 <div className="flex items-center">
-                                    <span className="text-red-600 font-bold text-xl mr-2">HURRY!</span>
+                                    <span className="text-red-600 font-bold text-2xl animate-pulse mr-2">HURRY!</span>
                                     <span className="text-xl font-bold">LIMITED TO {spotLimit} SPOTS ONLY!</span>
                                 </div>
                                 <div className="flex items-center mt-1">
@@ -136,18 +138,16 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                         {productOptions.map((option, index) => (
                             <div
                                 key={index}
-                                className={`border-2 p-4 rounded-lg relative ${selectedOption === index
-                                    ? 'border-blue-500 bg-blue-50'
-                                    : 'border-gray-200 hover:border-gray-300'
+                                className={`border-2 p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 ${selectedOption === index ? 'border-blue-500 bg-blue-50 scale-105' : 'border-gray-200 hover:border-gray-300 hover:scale-105'
                                     }`}
                             >
                                 {index === 1 && (
-                                    <div className="absolute -top-3 left-4 bg-blue-600 text-white px-3 py-1 text-xs rounded-full">
+                                    <div className="absolute -top-3 left-4 bg-blue-600 text-white px-3 py-1 text-xs rounded-full shadow-md">
                                         ★ BESTSELLER
                                     </div>
                                 )}
                                 {option.discount > 0 && (
-                                    <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 text-xs rounded-full">
+                                    <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 text-xs rounded-full shadow-md">
                                         {option.discount}% OFF
                                     </div>
                                 )}
@@ -158,24 +158,24 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                                             name="quantity"
                                             checked={selectedOption === index}
                                             onChange={() => setSelectedOption(index)}
-                                            className="mt-1 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                            className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                                         />
                                         <div>
-                                            <span className="font-medium text-lg">Buy {option.quantity} Pair</span>
+                                            <span className="font-semibold text-lg">Buy {option.quantity} Pair</span>
                                             <div className="mt-2">
                                                 <Image
                                                     src="/images/product.png"
                                                     alt={`${option.quantity} Pair`}
                                                     width={option.quantity * 60}
                                                     height={60}
-                                                    className="object-contain"
+                                                    className="object-contain rounded-lg"
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="text-right">
                                         <div className="line-through text-gray-400">${option.originalPrice}</div>
-                                        <div className="text-2xl font-bold">${option.price}</div>
+                                        <div className="text-2xl font-bold text-gray-900">${option.price}</div>
                                         <div className="text-green-500 text-sm">You Save ${option.savings}</div>
                                     </div>
                                 </label>
