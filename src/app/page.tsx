@@ -20,11 +20,14 @@ interface CheckoutInfo {
   spotLimit: number;
 }
 
+interface PageProps {
+  params: { slug: string };
+  searchParams: { [key: string]: string | undefined };
+}
+
 export default function Home({
   searchParams,
-}: {
-  searchParams: { template?: string };
-}) {
+}: PageProps) {
   // Determine which template to use from query params or default to template 1
   const templateNumber = searchParams.template ? parseInt(searchParams.template) : 1;
 
