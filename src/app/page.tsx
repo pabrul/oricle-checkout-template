@@ -1,8 +1,8 @@
-// src/app/page.tsx
-import fs from 'fs';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import path from 'path';
-import matter from 'gray-matter';
 import CheckoutPage from '@/components/checkout-page';
 
 interface ProductOption {
@@ -20,31 +20,30 @@ interface CheckoutInfo {
   spotLimit: number;
 }
 
-// Definindo os tipos corretos para Next.js App Router
-type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+export default function Home() {
+  const searchParams = useSearchParams();
+  const [checkoutData, setCheckoutData] = useState<CheckoutInfo | null>(null);
 
-export default async function Home({ searchParams }: Props) {
-  // Determine which template to use from query params or default to template 1
-  const templateParam = searchParams.template
-  const templateNumber = typeof templateParam === 'string' ? parseInt(templateParam) : 1;
+  useEffect(() => {
+    async function fetchData() {
+      const template = searchParams.get('template') || '1';
 
-  // Choose the correct markdown file
-  const filename = templateNumber === 2 ? 'splash-foam-checkout-template2.md' : 'splash-foam-checkout-template1.md';
+      try {
+        const response = await fetch(`/api/checkout?template=${template}`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const data = await response.json();
+        setCheckoutData(data);
+      } catch (error) {
+        console.error('Error fetching checkout data:', error);
+      }
+    }
 
-  // Read the markdown file
-  const checkoutPath = path.join(process.cwd(), '_checkout', filename);
-  const fileContents = fs.readFileSync(checkoutPath, 'utf8');
+    fetchData();
+  }, [searchParams]);
 
-  // Parse and validate the markdown frontmatter
-  const matterResult = matter(fileContents);
-  const checkoutData: CheckoutInfo = {
-    template: templateNumber,
-    productOptions: matterResult.data.productOptions as ProductOption[],
-    timerDuration: Number(matterResult.data.timerDuration),
-    spotLimit: Number(matterResult.data.spotLimit)
-  };
+  if (!checkoutData) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <main className="min-h-screen">
@@ -53,13 +52,17 @@ export default async function Home({ searchParams }: Props) {
         <div className="space-x-4">
           <Link
             href="/?template=1"
-            className={`px-4 py-2 rounded ${templateNumber === 1 ? 'bg-blue-500 text-white' : 'bg-white'}`}
+            prefetch={false}
+            className={`px-4 py-2 rounded ${checkoutData.template === 1 ? 'bg-blue-500 text-white' : 'bg-white'
+              }`}
           >
             Template 1
           </Link>
           <Link
             href="/?template=2"
-            className={`px-4 py-2 rounded ${templateNumber === 2 ? 'bg-blue-500 text-white' : 'bg-white'}`}
+            prefetch={false}
+            className={`px-4 py-2 rounded ${checkoutData.template === 2 ? 'bg-blue-500 text-white' : 'bg-white'
+              }`}
           >
             Template 2
           </Link>
