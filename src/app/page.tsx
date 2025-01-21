@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import CheckoutPage from '@/components/checkout-page';
@@ -20,7 +20,7 @@ interface CheckoutInfo {
   spotLimit: number;
 }
 
-export default function Home() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const [checkoutData, setCheckoutData] = useState<CheckoutInfo | null>(null);
 
@@ -46,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen">
+    <div>
       <div className="bg-gray-100 p-4 mb-4">
         <h2 className="font-bold mb-2">Template Switcher:</h2>
         <div className="space-x-4">
@@ -69,6 +69,16 @@ export default function Home() {
         </div>
       </div>
       <CheckoutPage info={checkoutData} />
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <main className="min-h-screen">
+      <Suspense fallback={<p>Loading search parameters...</p>}>
+        <CheckoutContent />
+      </Suspense>
     </main>
   );
 }
