@@ -50,6 +50,7 @@ template: 1 # or 2 for Oricle template
 ```
 
 ##  Project Structure
+```bash
 oricle-checkout-template/
 │-- src/
 │   ├── app/                   # Next.js pages and routes
@@ -63,6 +64,7 @@ oricle-checkout-template/
 │-- next.config.js                  # Next.js configuration
 │-- tailwind.config.js               # Tailwind CSS configuration
 │-- tsconfig.json                    # TypeScript configuration
+```
 
 
 ##  Built With
