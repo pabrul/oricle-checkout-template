@@ -1,5 +1,4 @@
 'use client';
-// src/components/checkout-page.tsx
 import React from 'react';
 import Template1 from './checkout/Template1';
 import Template2 from './checkout/Template2';

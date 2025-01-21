@@ -8,7 +8,7 @@ interface TimerProps {
 }
 
 export const Timer: React.FC<TimerProps> = ({ duration }) => {
-    // Inicialmente, não renderizamos nada
+    // Initially, we do not render anything
     const [mounted, setMounted] = useState(false);
     const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
@@ -27,7 +27,7 @@ export const Timer: React.FC<TimerProps> = ({ duration }) => {
         return () => clearInterval(timer);
     }, [timeLeft, mounted]);
 
-    // Não renderiza nada até o componente estar montado
+    // Does not render anything until the component is mounted
     if (!mounted || timeLeft === null) {
         return (
             <div className="text-red-600 font-bold">
