@@ -55,7 +55,7 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="template2 min-h-screen bg-gray-50">
             {/* Header */}
             <header className="bg-white border-b border-gray-200 shadow-md sticky top-0 z-50">
                 <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -138,19 +138,26 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                         {productOptions.map((option, index) => (
                             <div
                                 key={index}
-                                className={`border-2 p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 ${selectedOption === index ? 'border-blue-500 bg-blue-50 scale-105' : 'border-gray-200 hover:border-gray-300 hover:scale-105'
-                                    }`}
+                                className={`relative border-2 p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 
+                    ${selectedOption === index ?
+                                        'border-blue-500 bg-blue-50 scale-105' :
+                                        'border-gray-200 hover:border-gray-300 hover:scale-105'}`}
+                                onClick={() => setSelectedOption(index)}
                             >
+                                {/* Best Seller Badge */}
                                 {index === 1 && (
                                     <div className="absolute -top-3 left-4 bg-blue-600 text-white px-3 py-1 text-xs rounded-full shadow-md">
                                         ★ BESTSELLER
                                     </div>
                                 )}
+
+                                {/* Discount Badge */}
                                 {option.discount > 0 && (
                                     <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 text-xs rounded-full shadow-md">
                                         {option.discount}% OFF
                                     </div>
                                 )}
+
                                 <label className="flex items-start justify-between cursor-pointer">
                                     <div className="flex items-start space-x-4">
                                         <input
@@ -158,10 +165,12 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                                             name="quantity"
                                             checked={selectedOption === index}
                                             onChange={() => setSelectedOption(index)}
-                                            className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                            className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
                                         />
                                         <div>
-                                            <span className="font-semibold text-lg">Buy {option.quantity} Pair</span>
+                                            <span className="font-semibold text-lg block">
+                                                Buy {option.quantity} Pair
+                                            </span>
                                             <div className="mt-2">
                                                 <Image
                                                     src="/images/product.png"
@@ -174,9 +183,15 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="line-through text-gray-400">${option.originalPrice}</div>
-                                        <div className="text-2xl font-bold text-gray-900">${option.price}</div>
-                                        <div className="text-green-500 text-sm">You Save ${option.savings}</div>
+                                        <div className="line-through text-gray-400 text-sm">
+                                            ${option.originalPrice}
+                                        </div>
+                                        <div className="text-2xl font-bold text-gray-900">
+                                            ${option.price}
+                                        </div>
+                                        <div className="text-green-500 text-sm">
+                                            You Save ${option.savings}
+                                        </div>
                                     </div>
                                 </label>
                             </div>
@@ -354,8 +369,8 @@ const CheckoutTemplate2: React.FC<CheckoutTemplate2Props> = ({
                     </button>
 
                     {/* Trust Badges */}
-                    <div className="text-center space-y-4">
-                        <div className="flex justify-center items-center space-x-4">
+                    <div className="text-center space-y-4 pt-8">
+                        <div className="flex justify-center items-center space-x-4 px-8">
                             <Image
                                 src="/images/trust-badges/guaranteed-safe.png"
                                 alt="Guaranteed Safe Checkout"
